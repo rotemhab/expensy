@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('title')
-    Expensy- Homepage
+    Expensy- Search
 @stop
 
 @section('head')
@@ -9,7 +9,7 @@
 
 
 @section('content')
-    <h1>This is the home page</h1>
+    <h1>This is the search page</h1>
 @stop
 
 

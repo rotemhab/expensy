@@ -14,3 +14,15 @@
 Route::get('/', function () {
     return view('home');
 });
+
+Route::get('/search', function () {
+    return view('search');
+});
+
+Route::get('/categories', function () {
+    return view('categories');
+});
+
+Route::get('/upload', function () {
+    return view('upload');
+});
