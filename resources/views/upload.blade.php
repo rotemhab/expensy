@@ -9,7 +9,23 @@
 
 
 @section('content')
-    <h1>This is the upload page</h1>
+    <div class="content-page">
+				<!-- Start content -->
+				<div class="content">
+					<div class="container">
+
+						<!-- Page-Title -->
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <h4 class="page-title">Upload</h4>
+                            </div>
+                        </div>
+
+
+                    </div> <!-- container -->
+
+                </div> <!-- content -->
+        </div>
 @stop
 
 
