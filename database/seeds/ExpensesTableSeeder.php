@@ -11,7 +11,7 @@ class ExpensesTableSeeder extends Seeder
      */
     public function run()
     {
-        $businesses= array("Zepra", "Amazon","Bed, Bath & Beyond", "McDonalds");
+        $businesses= array("Zepra", "Amazon","Bed, Bath & Beyond", "McDonalds", "Starbucks", );
         foreach (range(1,100) as $index){
             //crete random timestamp
             $new_date_timestamp = mt_rand(date_create('2016-01-01')->getTimestamp(), date_create('2016-12-31')->getTimestamp());

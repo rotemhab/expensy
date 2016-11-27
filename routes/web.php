@@ -27,6 +27,9 @@ Route::get('/upload', function () {
     return view('upload');
 });
 
+Route::get('/test', 'SampleController@example');
+
+
 Route::get('/debug', function() {
 
     echo '<pre>';
