@@ -50,7 +50,7 @@
 
                                     <div class="row text-center m-t-30">
                                         <div class="col-xs-6">
-                                            <h3 data-plugin="counterup">8,459</h3>
+                                            <h3 data-plugin="counterup">{{$Expenses->first()->item}}</h3>
                                             <p class="text-muted text-overflow">Total Sales</p>
                                         </div>
                                         <div class="col-xs-6">

@@ -12,14 +12,12 @@ class SampleController extends Controller
 
     public function example() {
 
-        $expenses = Expense::all();
-        
-        if(!$expenses->isEmpty()) {
+        $expenses = Expense::where('item', 'LIKE', 'McDonalds')->first();
+        if($expenses) {
             # Output the books
-            foreach($expenses as $expense) {
-                echo $expense->amount.'<br>';
+                return $expenses->item;
             }
-        }
+
         else {
             echo 'No expenses found';
         }
