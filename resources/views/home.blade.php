@@ -50,12 +50,18 @@
 
                                     <div class="row text-center m-t-30">
                                         <div class="col-xs-6">
-                                            <h3 data-plugin="counterup">{{$Expenses->first()->item}}</h3>
-                                            <p class="text-muted text-overflow">Total Sales</p>
+                                            <h3 data-plugin="counterup">{{$Expenses->sum('amount')}}</h3>
+                                            <p class="text-muted text-overflow">Total Expenses</p>
                                         </div>
                                         <div class="col-xs-6">
                                             <h3 data-plugin="counterup">584</h3>
                                             <p class="text-muted text-overflow">Open Compaign</p>
+                                        </div>
+                                            @foreach ($ExpenseSum as $x => $x_sum)
+                                                <h3 data-plugin="counterup">{{"Sum of " . $x . " is " . $x_sum}}</h3>
+                                            @endforeach
+                                        <div>
+                                            
                                         </div>
                                     </div>
 
