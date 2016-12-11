@@ -28,6 +28,13 @@ class HomeController extends Controller
         return view('home')->with('ExpenseSum', $sumItems)->with('Expenses', $expenses);
         
     }
+    
+    public function display(Request $request) {
+        $from = $request->input('from');
+        $to = $request->input('to');
+        echo $request;
+        return 'Process adding new book: '.$from.' and '. $to;
+    }
 }
 
 ?>

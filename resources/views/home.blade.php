@@ -17,16 +17,15 @@
 						<!-- Page-Title -->
                         <div class="row">
                             <div class="col-sm-12">
-                                <ul class="nav nav-pills nav-pills-custom display-xs-none pull-right">
-                                    <li role="presentation"><a href="#">Today</a></li>
-                                    <li role="presentation" class="active"><a href="#">Yesterday</a></li>
-                                    <li role="presentation"><a href="#">Last Week</a></li>
-                                </ul>
-
                                 <h4 class="page-title">Dashboard</h4>
                             </div>
                         </div>
-
+                        <form method='POST' action='/'>
+                            {{ csrf_field() }}
+                            From:<input type='date' name='from'>
+                            To:<input type='date' name='to'>
+                            <input type='submit' value='Submit'>
+                        </form>
 
                         <div class="row">
                             <div class="col-lg-4">

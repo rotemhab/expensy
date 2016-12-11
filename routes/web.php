@@ -12,6 +12,7 @@
 */
 
 Route::get('/', 'HomeController@index')->name('home.index');
+Route::post('/', 'HomeController@display')->name('home.display');
 
 Route::get('/search', function () {
     return view('search');
