@@ -14,12 +14,12 @@
 Route::get('/', 'HomeController@index')->name('home.index');
 Route::post('/', 'HomeController@display')->name('home.display');
 
+Route::get('/categories', 'CategoryController@index')->name('category.index');
+Route::post('/categories', 'CategoryController@display')->name('category.display');
+
+
 Route::get('/search', function () {
     return view('search');
-});
-
-Route::get('/categories', function () {
-    return view('categories');
 });
 
 Route::get('/upload', function () {

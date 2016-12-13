@@ -123,7 +123,7 @@
                                 }
                             }]
                         },
-                        responsive: false
+                        responsive: true
                     }
                     });
             
@@ -160,7 +160,7 @@
                                 }
                             }]
                         },
-                        responsive: false
+                        responsive: true
                     }
                     });
 

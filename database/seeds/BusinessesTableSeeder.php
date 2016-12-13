@@ -17,7 +17,7 @@ class BusinessesTableSeeder extends Seeder
             "Clothing" =>array("Gap", "Uniqlo", "H&M"),
             "Bills" =>array("Verizon", "Direct Energy", "NY City Tax", "Direct TV", "Netflix"),
             "Car & Transportation" =>array("BP", "Shell", "Dan's Auto Service", "NYC Metro Service", "City Bike"),
-            "Health" =>array("Walgreens", "CSV", "Rite Aid"),
+            "Health" =>array("Walgreens", "CVS", "Rite Aid"),
             "Home & Garden" => array("Amazon", "Bed, Bath & Beyond", "Pottery Barn", "Ikea")
         );
         foreach ($businesses as $category => $businessesArray){
