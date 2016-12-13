@@ -8,8 +8,8 @@
     <meta charset='utf-8'>
     <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="css/style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.bundle.min.js"></script>
     @yield('head')
-
 </head>
 <body>
  <!-- Top Bar Start -->
@@ -19,7 +19,7 @@
                 <!-- LOGO -->
                 <div class="topbar-left">
                     <div class="text-center">
-                        <a href="index.html" class="logo">
+                        <a href="/" class="logo">
                             <i class="zmdi zmdi-toys icon-c-logo"></i><span>Expensy</span>
                             <!--<span><img src="assets/images/logo.png" alt="logo" style="height: 20px;"></span>-->
                         </a>

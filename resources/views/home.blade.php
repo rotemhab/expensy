@@ -22,127 +22,55 @@
                         </div>
                         <form method='POST' action='/'>
                             {{ csrf_field() }}
-                            From:<input type='date' name='from'>
-                            To:<input type='date' name='to'>
+                            From:<input type='date' name='from' value="2016-04-01">
+                            To:<input type='date' name='to' value="2016-12-12">
                             <input type='submit' value='Submit'>
                         </form>
 
                         <div class="row">
                             <div class="col-lg-4">
                                 <div class="card-box">
-                                    <div class="dropdown pull-right">
-                                        <a href="#" class="dropdown-toggle card-drop" data-toggle="dropdown"
-                                           aria-expanded="false">
-                                            <i class="zmdi zmdi-more-vert"></i>
-                                        </a>
-                                        <ul class="dropdown-menu" role="menu">
-                                            <li><a href="#">Action</a></li>
-                                            <li><a href="#">Another action</a></li>
-                                            <li><a href="#">Something else here</a></li>
-                                            <li class="divider"></li>
-                                            <li><a href="#">Separated link</a></li>
-                                        </ul>
-                                    </div>
-
-                                    <h4 class="header-title m-t-0">Daily Sales</h4>
-
-
+                                    <h4 class="header-title m-t-0">Expenses Over Time</h4>
                                     <div class="row text-center m-t-30">
-                                        <div class="col-xs-6">
-                                            <h3 data-plugin="counterup">{{$Expenses->sum('amount')}}</h3>
-                                            <p class="text-muted text-overflow">Total Expenses</p>
-                                        </div>
-                                        <div class="col-xs-6">
-                                            <h3 data-plugin="counterup">584</h3>
-                                            <p class="text-muted text-overflow">Open Compaign</p>
-                                        </div>
-                                            @foreach ($ExpenseSum as $x => $x_sum)
-                                                <h3 data-plugin="counterup">{{"Sum of " . $x . " is " . $x_sum}}</h3>
-                                            @endforeach
-                                        <div>
-                                            
-                                        </div>
-                                    </div>
-
-                                    <div class="text-center m-t-10">
-                                        <div id="morris-donut-example" style="height: 245px;"></div>
-                                        <ul class="list-inline chart-detail-list m-b-0">
-                                            <li>
-                                                <h5><i class="fa fa-circle m-r-5" style="color: #42a5f5;"></i>Series A</h5>
-                                            </li>
-                                            <li>
-                                                <h5><i class="fa fa-circle m-r-5" style="color: #64b5f6;"></i>Series B</h5>
-                                            </li>
-                                        </ul>
+                                        <canvas id="monthReport"></canvas>
                                     </div>
                                 </div>
                             </div><!-- end col -->
 
                             <div class="col-lg-4">
                                 <div class="card-box">
-                                    <div class="dropdown pull-right">
-                                        <a href="#" class="dropdown-toggle card-drop" data-toggle="dropdown"
-                                           aria-expanded="false">
-                                            <i class="zmdi zmdi-more-vert"></i>
-                                        </a>
-                                        <ul class="dropdown-menu" role="menu">
-                                            <li><a href="#">Action</a></li>
-                                            <li><a href="#">Another action</a></li>
-                                            <li><a href="#">Something else here</a></li>
-                                            <li class="divider"></li>
-                                            <li><a href="#">Separated link</a></li>
-                                        </ul>
-                                    </div>
-                                    <h4 class="header-title m-t-0">Statistics</h4>
-
+                                    <h4 class="header-title m-t-0">Expenses by Category</h4>
                                     <div class="row text-center m-t-30">
-                                        <div class="col-xs-4">
-                                            <h3 data-plugin="counterup">1,507</h3>
-                                            <p class="text-muted text-overflow">Total Sales</p>
-                                        </div>
-                                        <div class="col-xs-4">
-                                            <h3 data-plugin="counterup">916</h3>
-                                            <p class="text-muted text-overflow" title="Open Compaign">Open Compaign</p>
-                                        </div>
-                                        <div class="col-xs-4">
-                                            <h3 data-plugin="counterup">22</h3>
-                                            <p class="text-muted text-overflow">Daily Sales</p>
-                                        </div>
+                                        <canvas id="categoryReport"></canvas>
                                     </div>
-
-                                    <div id="morris-bar-example" style="height: 280px;" class="m-t-10"></div>
                                 </div>
                             </div><!-- end col -->
 
                             <div class="col-lg-4">
                                 <div class="card-box">
-                                    <div class="dropdown pull-right">
-                                        <a href="#" class="dropdown-toggle card-drop" data-toggle="dropdown"
-                                           aria-expanded="false">
-                                            <i class="zmdi zmdi-more-vert"></i>
-                                        </a>
-                                        <ul class="dropdown-menu" role="menu">
-                                            <li><a href="#">Action</a></li>
-                                            <li><a href="#">Another action</a></li>
-                                            <li><a href="#">Something else here</a></li>
-                                            <li class="divider"></li>
-                                            <li><a href="#">Separated link</a></li>
-                                        </ul>
-                                    </div>
-                                    <h4 class="header-title m-t-0">Total Revenue</h4>
-
+                                    <h4 class="header-title m-t-0">Top Expenses</h4>
                                     <div class="row text-center m-t-30">
-                                        <div class="col-xs-6">
-                                            <h3 data-plugin="counterup">7,653</h3>
-                                            <p class="text-muted text-overflow">Total Sales</p>
-                                        </div>
-                                        <div class="col-xs-6">
-                                            <h3 data-plugin="counterup">852</h3>
-                                            <p class="text-muted text-overflow">Open Compaign</p>
-                                        </div>
+                                        @if (!empty($sumByMonth))
+                                            <table class="table">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Date</th>
+                                                        <th>Transaction</th>
+                                                        <th>Amount</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    @foreach ($topExpenses as $i=>$j)
+                                                        <tr>
+                                                            <td>{!! $j->date !!}</td>
+                                                            <td>{!! $j->item !!}</td>
+                                                            <td>{!! $j->amount !!}</td>
+                                                        </tr>
+                                                    @endforeach
+                                                </tbody>
+                                            </table>
+                                        @endif
                                     </div>
-
-                                    <div id="morris-line-example" style="height: 280px;" class="m-t-10"></div>
                                 </div>
                             </div><!-- end col -->
 
@@ -158,4 +86,87 @@
 
 
 @section('body')
+@if (!empty($sumByMonth))
+<script src="/js/chart.js"></script>
+    <script>
+        window.onload = function() {
+            //console.log(data);
+            var monthLabels= [
+                @foreach ($sumByMonth as $i => $j) 
+                    {!! "'" . $j->month ."'" ." ," !!}
+                @endforeach
+                ]
+            var monthSeries= [
+                @foreach ($sumByMonth as $i => $j) 
+                    {!! $j->sum . " ," !!}
+                @endforeach
+                ]
+            
+            //create expenses by month bar chart
+            var ctx1 = document.getElementById('monthReport').getContext('2d');
+            Chart1 = new Chart(ctx1, {
+                    type: 'bar',
+                    data: {
+                        labels: monthLabels,
+                        datasets: [{
+                            label: 'day',
+                            data: monthSeries,
+                            backgroundColor: '#5e4562',
+                            lineTension: 0.2,
+                        }]
+                    },
+                    options: {
+                        scales: {
+                            yAxes: [{
+                                ticks: {
+                                    beginAtZero:true
+                                }
+                            }]
+                        },
+                        responsive: false
+                    }
+                    });
+            
+            //build label and value arrays for the expenses by category chart
+            var categoryLabels= [
+                @foreach ($sumByCategory as $i => $j) 
+                    {!! "'" . $i ."'" ." ," !!}
+                @endforeach
+                ]
+            var categorySeries = [
+                @foreach ($sumByCategory as $i => $j) 
+                    {!! $j->sum('amount') . " ," !!}
+                @endforeach
+                ]
+            
+            //create expenses by category pie
+            var ctx2 = document.getElementById('categoryReport').getContext('2d');
+            Chart1 = new Chart(ctx2, {
+                    type: 'pie',
+                    data: {
+                        labels: categoryLabels,
+                        datasets: [{
+                            label: 'day',
+                            data: categorySeries,
+                            backgroundColor: '#5e4562',
+                            lineTension: 0.2,
+                        }]
+                    },
+                    options: {
+                        scales: {
+                            yAxes: [{
+                                ticks: {
+                                    beginAtZero:true
+                                }
+                            }]
+                        },
+                        responsive: false
+                    }
+                    });
+
+            
+
+            }
+    </script>
+@endif
 @stop
