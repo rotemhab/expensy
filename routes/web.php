@@ -18,9 +18,10 @@ Route::get('/categories', 'CategoryController@index')->name('category.index');
 Route::post('/categories', 'CategoryController@display')->name('category.display');
 
 
-Route::get('/search', function () {
-    return view('search');
-});
+Route::get('/search', 'SearchController@index')->name('search.index');
+Route::post('/search', 'SearchController@display')->name('search.display');
+
+
 
 Route::get('/upload', function () {
     return view('upload');
