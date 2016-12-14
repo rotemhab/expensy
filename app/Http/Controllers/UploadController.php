@@ -55,7 +55,7 @@ class UploadController extends Controller
         }
         $newExpense->save();
         
-        //return view('upload')->with('Categories', $categories);
+        return view('upload')->with('Success', 'Success');
         
     }
 }

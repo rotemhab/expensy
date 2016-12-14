@@ -60,6 +60,11 @@ body{
     position: fixed;
 }
 
+#sidebar-menu > ul {
+    margin-top:20px;
+    list-style-type:none;
+}
+
 #sidebar-menu > ul > li > a.active {
     background: #2b3941 !important;
     border-left: 3px solid rgba(255, 255, 255, 0.4);
@@ -143,4 +148,20 @@ h1, h2, h3, h4, h5, h6 {
 
 #scroll_table{
     overflow:scroll;
+}
+
+.panel{
+    margin-top:100px;
+}
+
+#name{
+    line-height:40px;
+    margin-right:20px;
+    float:right;
+    color:white;
+}
+
+#name a{
+    color:white;
+    font-weight:100;
 }

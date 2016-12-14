@@ -11,18 +11,18 @@
 |
 */
 
-Route::get('/', 'HomeController@index')->name('home.index');
-Route::post('/', 'HomeController@display')->name('home.display');
+Route::get('/', 'DashboardController@index')->name('dashboard.index')->middleware('auth');
+Route::post('/', 'DashboardController@display')->name('dashboard.display')->middleware('auth');
 
-Route::get('/categories', 'CategoryController@index')->name('category.index');
-Route::post('/categories', 'CategoryController@display')->name('category.display');
+Route::get('/categories', 'CategoryController@index')->name('category.index')->middleware('auth');
+Route::post('/categories', 'CategoryController@display')->name('category.display')->middleware('auth');
 
 
-Route::get('/search', 'SearchController@index')->name('search.index');
-Route::post('/search', 'SearchController@display')->name('search.display');
+Route::get('/search', 'SearchController@index')->name('search.index')->middleware('auth');
+Route::post('/search', 'SearchController@display')->name('search.display')->middleware('auth');
 
-Route::get('/upload', 'UploadController@index')->name('upload.index');
-Route::post('/upload', 'UploadController@addExpense')->name('upload.addExpense');
+Route::get('/upload', 'UploadController@index')->name('upload.index')->middleware('auth');
+Route::post('/upload', 'UploadController@addExpense')->name('upload.addExpense')->middleware('auth');
 
 
 
@@ -62,4 +62,21 @@ Route::get('/debug', function() {
 
     echo '</pre>';
 
+});
+Auth::routes();
+Route::get('/logout','Auth\LoginController@logout')->name('logout');
+
+Route::get('/home', 'HomeController@index');
+
+Route::get('/show-login-status', function() {
+
+    # You may access the authenticated user via the Auth facade
+    $user = Auth::user();
+
+    if($user)
+        dump($user->toArray());
+    else
+        dump('You are not logged in.');
+
+    return;
 });

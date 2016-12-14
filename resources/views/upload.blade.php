@@ -20,6 +20,7 @@
                                 <h4 class="page-title">Upload</h4>
                             </div>
                         </div>
+                        @if (empty($Success))
                         <form method='POST' action='/upload'>
                             {{ csrf_field() }}
                             date:<input type='date' name='date' value="2016-04-01"><br>
@@ -32,6 +33,13 @@
                             amount:<input type='number' name="amount"><br>
                             <input type='submit' value='Submit'>
                         </form>
+                        @else
+                        <h3>Transaction uploaded successfully</h3>
+                        <form action="/upload">
+                            <input type="submit" value="Upload another transaction" />
+                        </form>
+                        @endif
+                        
 
 
                     </div> <!-- container -->

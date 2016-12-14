@@ -17,36 +17,40 @@
 						<!-- Page-Title -->
                         <div class="row">
                             <div class="col-sm-12">
-                                <h4 class="page-title">Categories</h4>
+                                <h4 class="page-title">Dashboard</h4>
                             </div>
                         </div>
-                        <form method='POST' action='/categories'>
+                        <form method='POST' action='/'>
                             {{ csrf_field() }}
-                            Select a category:
-                            <select name="category">
-                                @foreach ($Categories as $i=>$j)
-                                    <option value={{ $i }}>{{ $i }}</option>
-                                @endforeach
-                            </select>
+                            From:<input type='date' name='from' value="2016-04-01">
+                            To:<input type='date' name='to' value="2016-12-12">
                             <input type='submit' value='Submit'>
                         </form>
 
                         <div class="row">
-                            <div class="col-lg-6">
+                            <div class="col-lg-4">
                                 <div class="card-box">
-                                    <h4 class="header-title m-t-0">Category Expenses Over Time</h4>
+                                    <h4 class="header-title m-t-0">Expenses Over Time</h4>
                                     <div class="row text-center m-t-30">
                                         <canvas id="monthReport"></canvas>
                                     </div>
                                 </div>
                             </div><!-- end col -->
 
+                            <div class="col-lg-4">
+                                <div class="card-box">
+                                    <h4 class="header-title m-t-0">Expenses by Category</h4>
+                                    <div class="row text-center m-t-30">
+                                        <canvas id="categoryReport"></canvas>
+                                    </div>
+                                </div>
+                            </div><!-- end col -->
 
-                            <div class="col-lg-6">
+                            <div class="col-lg-4">
                                 <div class="card-box">
                                     <h4 class="header-title m-t-0">Top Expenses</h4>
                                     <div class="row text-center m-t-30">
-                                        @if (!empty($topExpenses))
+                                        @if (!empty($sumByMonth))
                                             <table class="table">
                                                 <thead>
                                                     <tr>
@@ -82,19 +86,19 @@
 
 
 @section('body')
-@if (!empty($categoryExpensesByMonth))
+@if (!empty($sumByMonth))
 <script src="/js/chart.js"></script>
     <script>
         window.onload = function() {
             //console.log(data);
             var monthLabels= [
-                @foreach ($categoryExpensesByMonth as $i => $j) 
-                    {!! "'" . $i ."'" ." ," !!}
+                @foreach ($sumByMonth as $i => $j) 
+                    {!! "'" . $j->month ."'" ." ," !!}
                 @endforeach
                 ]
             var monthSeries= [
-                @foreach ($categoryExpensesByMonth as $i => $j) 
-                    {!! $j->sum('amount') . " ," !!}
+                @foreach ($sumByMonth as $i => $j) 
+                    {!! $j->sum . " ," !!}
                 @endforeach
                 ]
             
@@ -105,7 +109,7 @@
                     data: {
                         labels: monthLabels,
                         datasets: [{
-                            label: {!! "'" . $category ." by month" ."'" !!},
+                            label: 'day',
                             data: monthSeries,
                             backgroundColor: '#2196f3',
                             lineTension: 0.2,
@@ -122,6 +126,53 @@
                         responsive: true
                     }
                     });
+            
+            //build label and value arrays for the expenses by category chart
+            var categoryLabels= [
+                @foreach ($sumByCategory as $i => $j) 
+                    {!! "'" . $i ."'" ." ," !!}
+                @endforeach
+                ]
+            var categorySeries = [
+                @foreach ($sumByCategory as $i => $j) 
+                    {!! $j->sum('amount') . " ," !!}
+                @endforeach
+                ]
+            
+            //create expenses by category pie
+            var ctx2 = document.getElementById('categoryReport').getContext('2d');
+            Chart1 = new Chart(ctx2, {
+                    type: 'pie',
+                    data: {
+                        labels: categoryLabels,
+                        datasets: [{
+                            label: 'Total expenses by Category',
+                            data: categorySeries,
+                            backgroundColor: [
+                                '#186FB3',
+                                '#104773',
+                                '#2196F3',
+                                '#072034',
+                                '#1E86D9',
+                                '#0D4AB3',
+                                '#082F73'
+                            ],
+                            
+                            lineTension: 0.2,
+                        }]
+                    },
+                    options: {
+                        scales: {
+                            yAxes: [{
+                                ticks: {
+                                    beginAtZero:true
+                                }
+                            }]
+                        },
+                        responsive: true
+                    }
+                    });
+            
             }
     </script>
 @endif
