@@ -21,11 +21,10 @@ Route::post('/categories', 'CategoryController@display')->name('category.display
 Route::get('/search', 'SearchController@index')->name('search.index');
 Route::post('/search', 'SearchController@display')->name('search.display');
 
+Route::get('/upload', 'UploadController@index')->name('upload.index');
+Route::post('/upload', 'UploadController@addExpense')->name('upload.addExpense');
 
 
-Route::get('/upload', function () {
-    return view('upload');
-});
 
 Route::get('/test', 'SampleController@example');
 

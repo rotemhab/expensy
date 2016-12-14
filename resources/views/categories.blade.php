@@ -32,7 +32,7 @@
                         </form>
 
                         <div class="row">
-                            <div class="col-lg-4">
+                            <div class="col-lg-6">
                                 <div class="card-box">
                                     <h4 class="header-title m-t-0">Category Expenses Over Time</h4>
                                     <div class="row text-center m-t-30">
@@ -41,15 +41,8 @@
                                 </div>
                             </div><!-- end col -->
 
-                            <div class="col-lg-4">
-                                <div class="card-box">
-                                    <h4 class="header-title m-t-0">Expenses by Category</h4>
-                                    <div class="row text-center m-t-30">
-                                    </div>
-                                </div>
-                            </div><!-- end col -->
 
-                            <div class="col-lg-4">
+                            <div class="col-lg-6">
                                 <div class="card-box">
                                     <h4 class="header-title m-t-0">Top Expenses</h4>
                                     <div class="row text-center m-t-30">
