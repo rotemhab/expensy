@@ -30,6 +30,13 @@
                             </select>
                             <input type='submit' value='Submit'>
                         </form>
+                        @if(count($errors) > 0)
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        @endif
 
                         <div class="row">
                             <div class="col-lg-6">

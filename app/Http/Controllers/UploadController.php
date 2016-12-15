@@ -18,7 +18,13 @@ class UploadController extends Controller
     }
     
     public function addExpense(Request $request) {
-
+        //validate the form
+        $this->validate($request, [
+            'date' => 'required|date',
+            'category' => 'required|max:20',
+            'item' => 'required|max:20|alpha_num',
+            'amount' => 'required|max:10|numeric',
+        ]);
         //get the form values
         $date = $request->input('date');
         $category = $request->input('category');

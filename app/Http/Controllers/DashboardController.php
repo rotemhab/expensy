@@ -13,6 +13,12 @@ class DashboardController extends Controller
     }
     
     public function display(Request $request) {
+        //validate the form input
+        $this->validate($request, [
+            'from' => 'required|date',
+            'to' => 'required|date',
+        ]);
+        
         //get the from and to dates
         $from = $request->input('from');
         $to = $request->input('to');

@@ -1,0 +1,1 @@
+Your transaction at {{$item}} on {{$date}} was deleted from the records.

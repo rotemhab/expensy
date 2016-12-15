@@ -17,6 +17,10 @@ class SearchController extends Controller
     }
     
     public function display(Request $request) {
+        //validate the form input
+        $this->validate($request, [
+            'search' => 'required|alpha_num'
+        ]);
         $search = $request->input('search');
         //get relevant search results from DB
         $searchResults = Expense::where('item','LIKE','%'.$search.'%')->get()->sortBy('date');

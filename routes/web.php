@@ -24,6 +24,11 @@ Route::post('/search', 'SearchController@display')->name('search.display')->midd
 Route::get('/upload', 'UploadController@index')->name('upload.index')->middleware('auth');
 Route::post('/upload', 'UploadController@addExpense')->name('upload.addExpense')->middleware('auth');
 
+Route::get('/delete', 'DeleteController@delete')->name('delete.delete')->middleware('auth');
+
+Route::get('/edit', 'EditController@edit')->name('edit.edit')->middleware('auth');
+Route::post('/edit', 'EditController@save')->name('edit.save')->middleware('auth');
+
 
 
 Route::get('/test', 'SampleController@example');

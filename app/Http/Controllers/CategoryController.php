@@ -20,6 +20,10 @@ class categoryController extends Controller
     public function display(Request $request) {
         //get all expenses from DB
         $categories = Business::all()->groupBy('category');
+        //validate the form input
+        $this->validate($request, [
+            'category' => 'required|max:25'
+        ]);
         //get the category value
         $category = $request->input('category');
         //get all expenses for category from DB

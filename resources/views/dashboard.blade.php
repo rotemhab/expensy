@@ -22,11 +22,19 @@
                         </div>
                         <form method='POST' action='/'>
                             {{ csrf_field() }}
-                            From:<input type='date' name='from' value="2016-04-01">
-                            To:<input type='date' name='to' value="2016-12-12">
+                            From:<input type='date' name='from' value="2016-01-01">
+                            To:<input type='date' name='to' value="2016-12-31">
                             <input type='submit' value='Submit'>
                         </form>
-
+                        
+                        @if(count($errors) > 0)
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        @endif
+                        
                         <div class="row">
                             <div class="col-lg-4">
                                 <div class="card-box">
@@ -104,12 +112,13 @@
             
             //create expenses by month bar chart
             var ctx1 = document.getElementById('monthReport').getContext('2d');
+            ctx1.canvas.height = 250;
             Chart1 = new Chart(ctx1, {
                     type: 'bar',
                     data: {
                         labels: monthLabels,
                         datasets: [{
-                            label: 'day',
+                            label: 'expenses over time',
                             data: monthSeries,
                             backgroundColor: '#2196f3',
                             lineTension: 0.2,
@@ -123,7 +132,6 @@
                                 }
                             }]
                         },
-                        responsive: true
                     }
                     });
             
@@ -141,7 +149,8 @@
             
             //create expenses by category pie
             var ctx2 = document.getElementById('categoryReport').getContext('2d');
-            Chart1 = new Chart(ctx2, {
+            ctx2.canvas.height = 200;
+            Chart2 = new Chart(ctx2, {
                     type: 'pie',
                     data: {
                         labels: categoryLabels,

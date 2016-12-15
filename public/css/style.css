@@ -152,6 +152,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .panel{
     margin-top:100px;
+    margin-left:30px;
 }
 
 #name{
@@ -164,4 +165,20 @@ h1, h2, h3, h4, h5, h6 {
 #name a{
     color:white;
     font-weight:100;
+}
+
+#searchTable th{
+    text-align: center;
+}
+
+.tdAction a{
+    color:red;
+}
+
+.tdAction{
+    max-width:25px;
+}
+
+#deleted{
+    color:red;
 }
