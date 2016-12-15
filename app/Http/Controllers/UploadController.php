@@ -23,7 +23,7 @@ class UploadController extends Controller
             'date' => 'required|date',
             'category' => 'required|max:20',
             'item' => 'required|max:20|alpha_num',
-            'amount' => 'required|max:10|numeric',
+            'amount' => 'required|max:1000000|numeric',
         ]);
         //get the form values
         $date = $request->input('date');
