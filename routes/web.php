@@ -31,7 +31,7 @@ Route::post('/edit', 'EditController@save')->name('edit.save')->middleware('auth
 
 
 
-Route::get('/test', 'SampleController@example');
+Route::get('/test', 'SampleController@example1');
 
 
 Route::get('/debug', function() {
