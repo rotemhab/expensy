@@ -18,15 +18,17 @@
                         <div class="row">
                             <div class="col-sm-12">
                                 <h4 class="page-title">Upload</h4>
+                                <button id="uploadSubmit">Submit</button>
                             </div>
                         </div>
                         @if (empty($Success))
                         <div class="row">
-                            <div class="col-lg-8">
+                            <div class="col-lg-12">
                                 <div class="card-box">
                                     <h4 class="header-title m-t-0">Search Results</h4>
                                     <div class="row text-center m-t-30" id="scroll_table">
-                                        <form>
+                                        <form action ="/CSVupload" id="CSV" method="post">
+                                            {{ csrf_field() }}
                                             <table class="table" id="searchTable">
                                                 <thead>
                                                     <tr>
@@ -41,17 +43,26 @@
                                                 <tbody>
                                                     @foreach ($Upload as $i=>$j)
                                                         <tr>
-                                                            <td><input type="date" name="date" value="2016/01/01"></td>
+                                                            <td><input type="date" name="date[]" value={!! $j->date !!}></td>
                                                             <td>
-                                                                <select name="category">
-                                                                 @foreach ($Categories as $i=>$j)
-                                                                    <option value={{ $i }}>{{ $i }}</option>
-                                                                @endforeach
+                                                                <select name="category[]">
+                                                                    @if ($j->category=="")
+                                                                        <option disabled selected value>--</option>
+                                                                    @endif
+                                                                    @foreach ($Categories as $a=>$b)
+                                                                        <option value={!!'"' . $a . '"'!!}
+                                                                        @if($j->category==$a)
+                                                                            selected
+                                                                        @endif
+                                                                        >
+                                                                        {{ $a }}
+                                                                        </option>
+                                                                    @endforeach
+                                                                    
                                                                 </select>
                                                             </td>
-                                                            <td><input type="text" name="item" value={!! $j->item !!}></td>
-                                                            <td><input type="number" name="amount" value={!! $j->amount !!}></td>
-                                                            <td class="tdAction"><a href={{ '/edit?expense_id='.$j->id }} >edit</a></td>
+                                                            <td><input type="text" name="item[]" value={!!'"' .  $j->item  . '"' !!}></td>
+                                                            <td><input type="number" name="amount[]" value={!! $j->amount !!}></td>
                                                             <td class="tdAction"><a href={{ '/delete?expense_id='.$j->id }}>delete</a></td>
                                                         </tr>
                                                     @endforeach
@@ -87,4 +98,11 @@
 
 
 @section('body')
+<script>
+    var submitButton = document.getElementById("uploadSubmit")
+    submitButton.addEventListener('click', function() {
+    document.getElementById("CSV").submit();
+    });
+    
+</script>
 @stop

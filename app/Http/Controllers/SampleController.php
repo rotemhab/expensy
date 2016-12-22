@@ -13,40 +13,19 @@ class SampleController extends Controller
 {
 
     public function example1(){
-        //test uploading csv file
-        $csvData = Excel::load('test.csv', function ($reader) {
+        
+        $csvData = Excel::load('Business List Dec 2016.csv', function ($reader) {
             $restuls = $reader->all();
-            $data= array();
             foreach ($restuls as $i=>$j){
-                $newExpense = new Expense;
-                $newExpense->date = $j->date;
-                $newExpense->type = $j->type;
-                $newExpense->item = $j->item;
-                $newExpense->amount = $j->amount;
-                array_push($data, $newExpense);
+                DB::table('businesses')->insert([
+                'created_at' => Carbon\Carbon::now()->toDateTimeString(),
+                'updated_at' => Carbon\Carbon::now()->toDateTimeString(),
+                'category' => $j->category,
+                'item' => $j->item;
+                ]);
             };
-        })->get();
-        $upload = array();
-        foreach ($csvData as $i=>$j){
-            $businesses = Business::all();
-            $newExpense = new Expense;
-            //check if the business already exists
-            if(!$businesses->contains('item', $j->item)){
-                $newExpense->category ="";
-            }
-            else {
-                $newExpense->category = $businesses->where('item','=',$j->item)->pluck('category')->first();
-            };
-            $business_id = $businesses->where('item','=',$j->item)->pluck('id')->first();
-            $newExpense->business_id = $business_id;
-            $newExpense->date = $j->date;
-            $newExpense->type = $j->type;
-            $newExpense->item = $j->item;
-            $newExpense->amount = $j->amount;
-            array_push($upload, $newExpense);
-        }
-        $categories = Business::all()->groupBy('category');
-        return view('confirmUpload')->with('Upload', $upload)->with('Categories', $categories);
+        }); 
+        
     }
     public function example() {
         

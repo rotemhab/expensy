@@ -29,6 +29,9 @@ Route::get('/delete', 'DeleteController@delete')->name('delete.delete')->middlew
 Route::get('/edit', 'EditController@edit')->name('edit.edit')->middleware('auth');
 Route::post('/edit', 'EditController@save')->name('edit.save')->middleware('auth');
 
+Route::get('/CSVupload', 'CSVuploadController@confirmUpload')->name('CSV.confirm')->middleware('auth');
+Route::post('/CSVupload', 'CSVuploadController@CSVupload')->name('CSV.upload')->middleware('auth');
+
 
 
 Route::get('/test', 'SampleController@example1');
