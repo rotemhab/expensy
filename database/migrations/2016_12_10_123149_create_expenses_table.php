@@ -20,8 +20,10 @@ class CreateExpensesTable extends Migration
             $table->date('date');
             $table->string('type');
             $table->string('category');
-            $table->string('item');
+            $table->string('item')->nullable();
             $table->integer('amount');
+            $table->string('source')->nullable();
+            $table->string('card')->nullable();
         });
         
     }

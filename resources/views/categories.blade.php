@@ -25,7 +25,13 @@
                             Select a category:
                             <select name="category">
                                 @foreach ($Categories as $i=>$j)
-                                    <option value={{ $i }}>{{ $i }}</option>
+                                    <option value={!!'"' .  $i . '"'!!}
+                                    @if(!empty($category))
+                                        @if($i==$category)
+                                            selected
+                                        @endif
+                                    @endif
+                                    >{{ $i }}</option>
                                 @endforeach
                             </select>
                             <input type='submit' value='Submit'>
@@ -39,40 +45,11 @@
                         @endif
 
                         <div class="row">
-                            <div class="col-lg-6">
+                            <div class="col-lg-12">
                                 <div class="card-box">
                                     <h4 class="header-title m-t-0">Category Expenses Over Time</h4>
                                     <div class="row text-center m-t-30">
                                         <canvas id="monthReport"></canvas>
-                                    </div>
-                                </div>
-                            </div><!-- end col -->
-
-
-                            <div class="col-lg-6">
-                                <div class="card-box">
-                                    <h4 class="header-title m-t-0">Top Expenses</h4>
-                                    <div class="row text-center m-t-30">
-                                        @if (!empty($topExpenses))
-                                            <table class="table">
-                                                <thead>
-                                                    <tr>
-                                                        <th>Date</th>
-                                                        <th>Transaction</th>
-                                                        <th>Amount</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    @foreach ($topExpenses as $i=>$j)
-                                                        <tr>
-                                                            <td>{!! $j->date !!}</td>
-                                                            <td>{!! $j->item !!}</td>
-                                                            <td>{!! $j->amount !!}</td>
-                                                        </tr>
-                                                    @endforeach
-                                                </tbody>
-                                            </table>
-                                        @endif
                                     </div>
                                 </div>
                             </div><!-- end col -->
